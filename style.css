@@ -1,0 +1,586 @@
+/* === Import Font and Reset === */
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+* {
+    /* The screenshot looks like it uses a cleaner font like Roboto or Poppins, not Oleo Script */
+    font-family: "Lobster Two", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === Body & Container Setup === */
+body {
+    cursor: pointer;
+    background-color: #e0d9d9; /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Start from the top */
+    min-height: 100vh;
+    padding: 50px 20px;
+}
+
+.container {
+    background-color: #f0e8e8; /* White card background */
+    padding: 40px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    width: 100%;
+    max-width: 500px;/* Max width for the desktop view card */
+    height: auto;
+}
+
+/* === Header === */
+h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #070707;
+    margin-bottom: 30px;
+    /* Use 'Oleo Script' if you prefer your original fancy font, otherwise stick to Roboto/sans-serif */
+    /* font-family: "Oleo Script", system-ui; */ 
+}
+
+/* === Input Section === */
+.input-section {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 25px;
+    
+}
+
+#todo-input {
+    flex-grow: 1; /* Takes up all available space */
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#todo-input:focus {
+    border-color: #544545; /* A simple blue focus border */
+}
+
+#add-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%; /* Circular button for '+' */
+    background-color: #6c6969; /* Dark button */
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0 0 5px;
+}
+
+#add-btn:hover {
+    background-color: #000;
+}
+
+/* === Todo List and Items === */
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s;
+}
+
+/* Checkbox (Hidden) */
+#todo-list input[type="checkbox"] {
+    /* Style the actual checkbox to look custom and centered */
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin-right: 15px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+#todo-list input[type="checkbox"]:checked {
+    border-color: #28a745; /* Green check border */
+    background-color: #28a745; /* Green background */
+}
+
+/* Checkmark inside the checkbox */
+#todo-list input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Todo Text Span */
+#todo-list span {
+    flex: 1;
+    font-size: 1rem;
+    color: #333;
+    cursor: text; /* Matches the edit on double-click behavior */
+    word-break: break-word; /* Prevents overflow for long text */
+}
+
+/* Completed Todo Text */
+#todo-list li input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+/* Delete Button 'x' */
+#todo-list button {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 5px;
+}
+
+#todo-list button:hover {
+    color: #dc3545; /* Red on hover */
+}
+
+
+/* === Footer Info (Remaining Count and Quote) === */
+.footer-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+#remaining-count {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.quote {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* --- */
+
+
+@media (max-width: 576px) {
+    /* This targets smaller mobile screens */
+    
+    body {
+        padding: 20px 10px; /* Less top and side padding on the body */
+    }
+    
+    .container {
+        padding: 20px 15px; /* Less padding inside the main card */
+        box-shadow: none; /* Remove shadow to look seamless like a mobile app */
+        border-radius: 0;
+    }
+    
+    h1 {
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+    }
+
+    #todo-list li {
+        padding: 10px 8px; /* Slightly less padding on list items */
+    }
+
+    /* Smaller spacing for footer text */
+    .footer-info {
+        margin-top: 20px;
+        padding-top: 15px;
+    }
+}
+
+
+
+
+
+
+
+/* 🧱 Layout for the extra sections (Quick Notes, Reflection, Progress) */
+.notes-section,
+.reflection-section,
+.stats-section {
+    display: block;
+    width: 100%;
+    max-width: 600px;       /* keeps layout aligned with the todo list */
+    margin: 20px auto;      /* centers each section and adds spacing */
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+/* 📝 Section headings */
+.notes-section h2,
+.reflection-section h2,
+.stats-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* ✏️ Text areas styling */
+#notes-area,
+#reflection-input {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    resize: none;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#notes-area:focus,
+#reflection-input:focus {
+    border-color: #4CAF50;  /* subtle focus color */
+}
+
+/* 📊 Stats section styling */
+.stats-section {
+    font-size: 1rem;
+    color: #444;
+}
+
+.stats-section p {
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* 📱 Mobile responsive adjustments */
+@media (max-width: 600px) {
+    .notes-section,
+    .reflection-section,
+    .stats-section {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    #notes-area,
+    #reflection-input {
+        height: 80px;
+        font-size: 0.9rem;
+    }
+
+    .notes-section h2,
+    .reflection-section h2,
+    .stats-section h2 {
+        font-size: 1.1rem;
+    }
+}
+/* 🌙 Footer styling */
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #666;
+    font-size: 0.95rem;
+    padding: 15px 0;
+    border-top: 1px solid #e0e0e0;
+    background: #fafafa;
+}
+
+.footer p {
+    margin: 0;
+    color: #000;
+}
+
+.footer strong {
+    color: #030303;
+}
+
+/* Optional: add a subtle hover effect for personality */
+.footer strong:hover {
+    color:  #28a745;
+    transition: color 0.3s ease;
+}
+
+/* 🎨 Portfolio Card */
+.portfolio-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto;
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #4CAF50;
+}
+
+.portfolio-card h2 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.role {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.bio {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+.portfolio-links a {
+    display: inline-block;
+    margin: 5px 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-links a:hover {
+    background-color: #388E3C;
+}
+
+/* 📱 Responsive tweak */
+@media (max-width: 600px) {
+    .portfolio-card {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .profile-img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+
+.portfolio-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 370px;
+    width: 100%;
+    background: #fff;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: rgb(127, 178, 178);
+    padding: 3px;
+    margin-bottom: 10px;
+
+}
+.image .portfolio-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #FFF;
+}
+.portfolio-card .text-data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+
+}
+.text-data .name{
+    font-size: 22px;
+    font-weight: 500;
+}
+.text-data .job{
+    font-size: 15px;
+    font-weight: 400;
+}
+.portfolio-card .media-buttons{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+.media-buttons .link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    height: 34px;
+    width: 34px;
+    border-radius: 50px;
+    margin: 0 8px;
+    background-color: #4070f4;
+    text-decoration: none;
+}
+.portfolio-card .buttons{
+    display: flex;
+    align-items: center;
+    margin-top: 25px ;
+
+}
+.buttons .button{
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    border: none;
+    border-radius: 24px;
+    margin: 0 10px;
+    padding: 8px 24px;
+ background-color: rgb(154, 164, 164);
+ cursor: pointer;
+ transition: all 0.3s ease;
+
+}
+.buttons .button:hover{
+    background-color: rgb(57, 61, 61);
+}
+.portfolio-card .analytics{
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+}
+.analytics .data{
+    display: flex;
+    align-items: center;
+    color: #333;
+    padding: 0 20px;
+    border-right: 2px solid #e7e7e7;
+}
+.data i{
+    font-size: 18px;
+    margin-right: 6px;
+}
+.data:last-child{
+    border-right: none;
+}
+.footer span{
+    color: #000000;
+}
+.footer span:hover{
+    color: #28a745;
+}
+
+@media (max-width: 768px) {
+    .portfolio-card {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .image {
+        height: 120px;
+        width: 120px;
+    }
+
+    .text-data .name {
+        font-size: 20px;
+    }
+
+    .text-data .job {
+        font-size: 14px;
+    }
+
+    .media-buttons .link {
+        height: 32px;
+        width: 32px;
+        font-size: 16px;
+        margin: 0 6px;
+    }
+
+    .buttons .button {
+        font-size: 11px;
+        padding: 6px 18px;
+        margin: 0 6px;
+    }
+
+    .analytics {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .analytics .data {
+        border: none;
+        padding: 4px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-card {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .image {
+        height: 100px;
+        width: 100px;
+    }
+
+    .text-data .name {
+        font-size: 18px;
+    }
+
+    .text-data .job {
+        font-size: 13px;
+    }
+
+    .media-buttons .link {
+        height: 28px;
+        width: 28px;
+        font-size: 14px;
+        margin: 0 5px;
+    }
+
+    .buttons .button {
+        font-size: 10px;
+        padding: 5px 14px;
+    }
+}
